@@ -12,7 +12,12 @@ const videoStreaming = async (req, res) => {
 
     const range = req.headers.range;
     if (!range) {
-      return res.status(416).send("Range header required");
+    res.writeHead(200, {
+      "Content-Length": fileSize,
+      "Content-Type": "video/mp4",
+    });
+    fs.createReadStream(videopath).pipe(res);
+    return;
     }
 
     const parts = range.replace(/bytes=/, "").split("-");
@@ -53,7 +58,12 @@ const streamAudio = async (req, res) => {
     const range = req.headers.range;
 
     if (!range) {
-      return res.status(416).send("Range header required");
+       res.writeHead(200, {
+         "Content-Length": fileSize,
+         "Content-Type": "video/mp4",
+       });
+       fs.createReadStream(audioPath).pipe(res);
+       return;
     }
 
     const parts = range.replace(/bytes=/, "").split("-");
@@ -80,5 +90,7 @@ const streamAudio = async (req, res) => {
     res.status(500).send("Server error");
   }
 };
+
+
 
 module.exports = { videoStreaming, streamAudio };

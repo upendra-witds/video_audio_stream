@@ -6,6 +6,7 @@ const { videoStreaming, streamAudio } = require("../controller/videoStreaming");
 router.get("/audio-streaming", streamAudio);
 router.get("/video-streaming", videoStreaming);
 app.get("/", (req, res) => {
-  res.send("Server Connected Successfully");
+  res.status(200).json("Server Connected Successfully");
 });
+
 module.exports = router;
