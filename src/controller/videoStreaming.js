@@ -4,7 +4,7 @@ const fs = require("fs");
 // const { number } = require('joi');
 
 const videoStreaming = async (req, res) => {
-  const videopath = path.join(__dirname, "../uploads/videos", "ISS_Tour.mp4");
+  const videopath = path.join(__dirname, "../uploads/videos", "A_Journey.mp4");
 
   try {
     const stat = await fs.promises.stat(videopath);
